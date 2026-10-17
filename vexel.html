@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#01061a">
+<title>Vexel — Your next customer starts with a hello.</title>
+<style>
+  @font-face {
+    font-family: 'Google Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
+    src: url('assets/google-sans-400.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Google Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-display: block;
+    src: url('assets/google-sans-500.woff2') format('woff2');
+  }
+
+  :root {
+    /* reference frame 1280x800 — at 1280x800 --u is 1px; falls back to vh where dvh is unsupported */
+    --u: min(100vh / 800, max(100vw / 1280, min(100vw / 640, .75px)));
+    --u: min(100dvh / 800, max(100vw / 1280, min(100vw / 640, .75px)));
+    --ink: #ffffff;
+    --nav: rgba(238, 242, 255, .9);
+    --subhead: rgba(226, 233, 255, .74);
+    --link: rgba(212, 236, 255, .77);
+    --hairline: rgba(255, 255, 255, .19);
+    --button: #ffffff;
+    --button-ink: #0a0a0a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  body {
+    background: #01061a;
+    background-image: linear-gradient(90deg, #00061a 0%, #01071b 22%, #01071a 45%, #010718 62%, #010614 80%, #020511 100%);
+    color: var(--ink);
+    font-family: 'Google Sans', 'Product Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: geometricPrecision;
+    font-kerning: normal;
+  }
+
+  :focus { outline: none; }
+  .wordmark:focus-visible, .nav a:focus-visible, .discover:focus-visible {
+    outline: 2px solid #7fd4ff;
+    outline-offset: 4px;
+  }
+  .button:focus-visible {
+    outline: 2px solid #7fd4ff;
+    outline-offset: 3px;
+  }
+
+  .hero {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  /* ---------------- masthead ---------------- */
+  .masthead {
+    position: relative;
+    z-index: 3;
+    flex: 0 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: calc(env(safe-area-inset-top, 0px) + 40.5 * var(--u));
+  }
+
+  .wordmark {
+    display: block;
+    margin-left: calc(-0.5 * var(--u));
+    line-height: 0;
+  }
+  .wordmark svg {
+    display: block;
+    height: max(23.5 * var(--u), 17px);
+    width: auto;
+    fill: #ffffff;
+  }
+
+  .hairline {
+    width: max(284 * var(--u), 252px);
+    height: 1px;
+    margin-top: calc(24 * var(--u));
+    background: var(--hairline);
+  }
+
+  .nav {
+    width: max(284 * var(--u), 252px);
+    display: flex;
+    justify-content: space-between;
+    margin-top: calc(17.4 * var(--u));
+    padding: 0 calc(8.9 * var(--u));
+  }
+  .nav a {
+    color: var(--nav);
+    font-size: max(15 * var(--u), 13px);
+    letter-spacing: -0.033em;
+    line-height: 1;
+    text-decoration: none;
+    transition: color .18s ease;
+  }
+  .nav a:hover { color: #fff; }
+
+  /* ---------------- flexible gap above the copy ---------------- */
+  .gap {
+    flex: 82.98;
+    min-height: calc(24 * var(--u));
+    width: 100%;
+  }
+
+  /* ---------------- copy ---------------- */
+  .copy {
+    position: relative;
+    z-index: 2;
+    flex: 0 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .headline {
+    margin: 0;
+    font-weight: 400;
+    font-size: max(68 * var(--u), 34px);
+    line-height: 0.9559;
+    letter-spacing: -0.0279em;
+    white-space: nowrap;
+  }
+  .headline .l {
+    display: block;
+    overflow: hidden;
+  }
+  .headline .li {
+    display: block;
+  }
+  .headline .l2 {
+    letter-spacing: -0.0294em;
+    position: relative;
+    left: calc(2.6 * var(--u));
+  }
+
+  .subhead {
+    margin: calc(18.98 * var(--u)) 0 0;
+    font-size: max(21 * var(--u), 15px);
+    letter-spacing: -0.005em;
+    color: var(--subhead);
+    text-wrap: balance;
+  }
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: max(216 * var(--u), 196px);
+    height: max(46 * var(--u), 44px);
+    margin-top: calc(25.64 * var(--u));
+    border: none;
+    border-radius: max(4.5 * var(--u), 4px);
+    background: var(--button);
+    color: var(--button-ink);
+    font-family: inherit;
+    font-weight: 500;
+    font-size: max(17 * var(--u), 15px);
+    letter-spacing: -0.0265em;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color .2s ease, box-shadow .2s ease;
+  }
+  .button:hover {
+    background: #e8eef7;
+    box-shadow: 0 0 0 calc(4 * var(--u)) rgba(120, 200, 255, .12);
+  }
+
+  .discover {
+    display: inline-flex;
+    align-items: center;
+    gap: .3em;
+    margin-top: calc(20.55 * var(--u));
+    color: var(--link);
+    font-size: max(14.8 * var(--u), 13px);
+    letter-spacing: -0.051em;
+    text-decoration: none;
+  }
+  .discover .arrow {
+    width: .68em;
+    height: .85em;
+    overflow: visible;
+    transition: transform .3s ease;
+  }
+  .discover .arrow path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.45;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .discover:hover .arrow { transform: translateY(.12em); }
+
+  /* ---------------- background video field ---------------- */
+  .field {
+    position: relative;
+    z-index: 1;
+    flex: 318.68;
+    min-height: calc(160 * var(--u));
+    width: 100%;
+    container-type: size;
+  }
+  .field video {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: auto;
+    aspect-ratio: 1619 / 971;
+    height: max(100cqw * 971 / 1619, (100cqh + 36.4 * var(--u)) / 0.49537 + 1px);
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 4%);
+    mask-image: linear-gradient(to bottom, transparent 0%, #000 4%);
+  }
+  /* without container units */
+  @supports not (height: 1cqh) {
+    .field video { height: max(60vw, 105vh); }
+  }
+
+  /* ---------------- entrance (while .intro is on) ---------------- */
+  .intro .wordmark { opacity: 0; }
+  .intro .hairline { transform: scaleX(0); }
+  .intro .nav a { opacity: 0; }
+  .intro .headline .li { transform: translateY(104%); }
+  .intro .subhead,
+  .intro .button,
+  .intro .discover { opacity: 0; }
+
+  /* ---------------- responsive ---------------- */
+  /* tablet */
+  @media (min-width: 600px) and (max-width: 1099.98px) and (min-height: 541px) {
+    :root {
+      --u: min(100vh / 800, 1px, max(100vw / 1280, 100vh / 1190, .86px));
+      --u: min(100dvh / 800, 1px, max(100vw / 1280, 100dvh / 1190, .86px));
+    }
+    .field {
+      max-height: 48vh;
+      max-height: 48dvh;
+    }
+    .nav a { padding: 14px 8px; margin: -14px -8px; }
+    .discover { padding: 12px 10px; margin: calc(20.55 * var(--u) - 12px) -10px -12px; }
+  }
+
+  /* portrait under 600px */
+  @media (max-width: 599.98px) {
+    :root {
+      --u: min(100dvh / 800, max(100vw / 1280, min(100vw / 640, .75px)));
+      --u: min(100svh / 800, max(100vw / 1280, min(100vw / 640, .75px)));
+    }
+    .hero { padding-left: 24px; padding-right: 24px; }
+    .headline { font-size: max(26px, min(68 * var(--u), (100vw - 48px) / 8.235)); }
+    .subhead {
+      font-size: max(16px, min(21 * var(--u), 3.345vw));
+      line-height: 1.25;
+      overflow-wrap: break-word;
+    }
+    .hairline,
+    .nav { width: min(max(284 * var(--u), 252px), calc(100vw - 32px)); }
+    .field {
+      max-height: 48vh;
+      max-height: 48dvh;
+    }
+    .nav a { padding: 14px 8px; margin: -14px -8px; }
+    .discover { padding: 12px 10px; margin: calc(20.55 * var(--u) - 12px) -10px -12px; }
+  }
+
+  /* landscape shorter than 540px — desktop proportions, lower floors */
+  @media (max-height: 539.98px) {
+    .wordmark svg { height: max(23.5 * var(--u), 13px); }
+    .hairline { width: max(284 * var(--u), 210px); }
+    .nav { width: max(284 * var(--u), 210px); }
+    .nav a { font-size: max(15 * var(--u), 11px); }
+    .headline { font-size: max(68 * var(--u), 28px); }
+    .subhead { font-size: max(21 * var(--u), 12px); }
+    .button {
+      width: max(216 * var(--u), 150px);
+      height: max(46 * var(--u), 34px);
+      font-size: max(17 * var(--u), 12.5px);
+    }
+    .discover { font-size: max(14.8 * var(--u), 11px); }
+    .gap { min-height: calc(14 * var(--u)); }
+    .field { min-height: calc(120 * var(--u)); }
+  }
+
+  /* coarse pointer in that short landscape — tap targets only */
+  @media (max-height: 539.98px) and (pointer: coarse) {
+    .nav a { padding: 14px 8px; margin: -14px -8px; }
+    .discover { padding: 12px 10px; margin: calc(20.55 * var(--u) - 12px) -10px -12px; }
+  }
+
+  /* 359px and below — outside the portrait block, let the headline wrap at 30px */
+  @media (max-width: 359px) {
+    .headline {
+      white-space: normal;
+      font-size: 30px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      transition-duration: 0s !important;
+      animation-duration: 0s !important;
+      animation-iteration-count: 1 !important;
+    }
+  }
+</style>
+<script>
+  /* mark the entrance before first paint, but only when it can actually run */
+  (function () {
+    var d = document.documentElement;
+    var reduced = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var waapi = typeof Element !== 'undefined' && typeof Element.prototype.animate === 'function';
+    if (!waapi || typeof matchMedia !== 'function' || reduced) return;
+    d.classList.add('intro');
+    window.__vexelIntroStarted = false;
+    window.__vexelIntroGuard = setTimeout(function () {
+      if (!window.__vexelIntroStarted) d.classList.remove('intro');
+    }, 3500);
+  })();
+</script>
+</head>
+<body>
+<main class="hero">
+
+  <header class="masthead">
+    <a class="wordmark" href="#" aria-label="Vexel home">
+      <svg viewBox="588 40.5 103.5 23.5" aria-hidden="true" focusable="false">
+        <path d="M588.6 40.8H594.9L601.4 56.6L606.5 40.8H612.6L604.2 63.5H597.8Z"/>
+        <path d="M612.8 40.8H630.5V45.2H619.2V49.8H628.3V54.4H619.2V58.9H631.5V63.5H612.8Z"/>
+        <path d="M631.3 40.8H637.9L642.5 47.4L646.5 40.8H653.1L646.4 52L653.6 63.5H647.1L642.5 56.4L638.3 63.5H631.4L638.8 52Z"/>
+        <path d="M653.6 40.8H669.6V63.5H653.6V58.9H664.3V54.4H657V49.8H664.3V45.2H653.6Z"/>
+        <path d="M672.4 40.8H677.6V58.9H690.5V63.5H672.4Z"/>
+      </svg>
+    </a>
+    <div class="hairline"></div>
+    <nav class="nav">
+      <a href="#platform">Platform</a>
+      <a href="#company">Company</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <div class="gap" aria-hidden="true"></div>
+
+  <div class="copy">
+    <h1 class="headline">
+      <span class="l"><span class="li">Your next customer</span></span><span class="l l2"><span class="li">starts with a hello.</span></span>
+    </h1>
+    <p class="subhead">Make&nbsp;the&nbsp;first&nbsp;move. We&rsquo;ll&nbsp;help&nbsp;with&nbsp;what&nbsp;follows.</p>
+    <a class="button" href="#contact">Start a conversation</a>
+    <a class="discover" href="#platform">Discover the platform
+      <svg class="arrow" viewBox="0 0 11 12.6" aria-hidden="true" focusable="false">
+        <path d="M5.5 .4V12M1 7.5L5.5 12L10 7.5"/>
+      </svg>
+    </a>
+  </div>
+
+  <div class="field">
+    <video src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261005_182549_18378239-da8f-48a7-9666-d6e0a6a88561.mp4"
+           autoplay muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1"></video>
+  </div>
+
+</main>
+
+<script>
+  /* entrance, once per load */
+  (function () {
+    var doc = document.documentElement;
+    if (!doc.classList.contains('intro')) return;
+
+    var wordmark = document.querySelector('.wordmark');
+    var logo = document.querySelector('.wordmark svg');
+    var hairline = document.querySelector('.hairline');
+    var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav a'));
+    var lines = Array.prototype.slice.call(document.querySelectorAll('.headline .li'));
+    var subhead = document.querySelector('.subhead');
+    var button = document.querySelector('.button');
+    var discover = document.querySelector('.discover');
+    var arrow = document.querySelector('.arrow');
+
+    var QUINT = 'cubic-bezier(0.22, 1, 0.36, 1)';
+    var EXPO = 'cubic-bezier(0.16, 1, 0.3, 1)';
+    var HAIR = 'cubic-bezier(0.7, 0, 0.2, 1)';
+
+    var anims = [];
+    function run(el, frames, opts) {
+      if (!el) return;
+      anims.push(el.animate(frames, opts));
+    }
+
+    function begin() {
+      if (!doc.classList.contains('intro')) return;
+      window.__vexelIntroStarted = true;
+      if (window.__vexelIntroGuard) clearTimeout(window.__vexelIntroGuard);
+
+      /* distances scale with the rendered logo height */
+      var h = logo ? logo.getBoundingClientRect().height : 23.5;
+      var k = Math.min(1, Math.max(0.65, h / 23.5));
+
+      run(wordmark,
+        [{ opacity: 0, transform: 'translateY(' + (-6 * k) + 'px)' },
+         { opacity: 1, transform: 'translateY(0px)' }],
+        { duration: 900, delay: 60, easing: QUINT, fill: 'both' });
+
+      run(hairline,
+        [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }],
+        { duration: 1000, delay: 180, easing: HAIR, fill: 'both' });
+
+      navLinks.forEach(function (el, i) {
+        run(el,
+          [{ opacity: 0, transform: 'translateY(' + (-4 * k) + 'px)' },
+           { opacity: 1, transform: 'translateY(0px)' }],
+          { duration: 700, delay: i === 1 ? 420 : 490, easing: QUINT, fill: 'both' });
+      });
+
+      lines.forEach(function (el, i) {
+        run(el,
+          [{ transform: 'translateY(104%)' }, { transform: 'translateY(0%)' }],
+          { duration: 1100, delay: i === 0 ? 200 : 290, easing: EXPO, fill: 'both' });
+      });
+
+      run(subhead,
+        [{ opacity: 0, transform: 'translateY(' + (10 * k) + 'px)' },
+         { opacity: 1, transform: 'translateY(0px)' }],
+        { duration: 850, delay: 700, easing: QUINT, fill: 'both' });
+
+      run(button,
+        [{ opacity: 0, transform: 'translateY(' + (12 * k) + 'px) scale(0.975)' },
+         { opacity: 1, transform: 'translateY(0px) scale(1)' }],
+        { duration: 900, delay: 860, easing: EXPO, fill: 'both' });
+
+      run(discover,
+        [{ opacity: 0, transform: 'translateY(' + (6 * k) + 'px)' },
+         { opacity: 1, transform: 'translateY(0px)' }],
+        { duration: 700, delay: 1040, easing: QUINT, fill: 'both' });
+
+      run(arrow,
+        [{ transform: 'translateY(' + (-5 * k) + 'px)' }, { transform: 'translateY(0px)' }],
+        { duration: 820, delay: 1120, easing: EXPO, fill: 'both' });
+
+      Promise.all(anims.map(function (a) { return a.finished; })).then(finish, finish);
+    }
+
+    function finish() {
+      doc.classList.remove('intro');
+      anims.forEach(function (a) { try { a.cancel(); } catch (e) {} });
+      var ae = document.activeElement;
+      if (!ae || ae === document.body || ae === doc || !doc.contains(ae)) {
+        var b = document.body;
+        b.style.display = 'none';
+        void b.offsetHeight;
+        b.style.display = '';
+      }
+      doc.setAttribute('data-intro', 'done');
+    }
+
+    /* wait for fonts and the video, but never longer than 900ms */
+    function whenReady(cb) {
+      var done = false, timer;
+      function finishWait() {
+        if (done) return;
+        done = true;
+        clearTimeout(timer);
+        cb();
+      }
+      timer = setTimeout(finishWait, 900);
+
+      var waits = [];
+      if (document.fonts && document.fonts.ready && typeof document.fonts.ready.then === 'function') {
+        waits.push(document.fonts.ready.catch(function () {}));
+      }
+      var v = document.querySelector('.field video');
+      waits.push(new Promise(function (resolve) {
+        if (!v) return resolve();
+        if (v.readyState >= 2) return resolve();
+        var settled = false;
+        function doneWait() { if (!settled) { settled = true; resolve(); } }
+        v.addEventListener('loadeddata', doneWait, { once: true });
+        v.addEventListener('error', doneWait, { once: true });
+      }));
+
+      Promise.all(waits).then(finishWait, finishWait);
+    }
+
+    whenReady(begin);
+  })();
+</script>
+</body>
+</html>
